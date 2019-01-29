@@ -1,0 +1,9 @@
+name: faastruby-spec-helper
+version: 0.1.0
+
+authors:
+  - Paulo Arruda <paulo@faastruby.io>
+
+crystal: 0.27.0
+
+license: MIT
