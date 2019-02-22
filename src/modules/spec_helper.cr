@@ -53,7 +53,7 @@ module FaaStRuby::SpecHelper
     headers = {"Location" => function}
     Response.new(body: nil, status: status, headers: headers)
   end
-  
+
   def redirect_to(url : String, status : Int32 = 303)
     headers = {"Location" => url}
     Response.new(body: nil, status: status, headers: headers)
@@ -84,22 +84,26 @@ module FaaStRuby::SpecHelper
       return Response.new(io: io, status: status, headers: headers, binary: bin)
     when png
       headers["Content-Type"] ||= "image/png"
-      resp_body = Base64.urlsafe_encode(png, false)
+      file = File.open(png, "rb"){|f| f.gets_to_end}
+      resp_body = Base64.urlsafe_encode(file, false)
       bin = true
     when svg
       headers["Content-Type"] ||= "image/svg+xml"
       resp_body = svg
     when jpeg
       headers["Content-Type"] ||= "image/jpeg"
-      resp_body = Base64.urlsafe_encode(jpeg, false)
+      file = File.open(jpeg, "rb"){|f| f.gets_to_end}
+      resp_body = Base64.urlsafe_encode(file, false)
       bin = true
     when gif
       headers["Content-Type"] ||= "image/gif"
-      resp_body = Base64.urlsafe_encode(gif, false)
+      file = File.open(gif, "rb"){|f| f.gets_to_end}
+      resp_body = Base64.urlsafe_encode(file, false)
       bin = true
     when icon
       headers["Content-Type"] ||= "image/x-icon"
-      resp_body = Base64.urlsafe_encode(icon, false)
+      file = File.open(icon, "rb"){|f| f.gets_to_end}
+      resp_body = Base64.urlsafe_encode(file, false)
       bin = true
     when css
       headers["Content-Type"] ||= "text/css"
